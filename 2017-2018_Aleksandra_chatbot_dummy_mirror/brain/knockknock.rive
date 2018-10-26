@@ -1,0 +1,82 @@
+! version = 2.0
+
+// Substitutions
+! sub i'm     = i am
+! sub i'd     = i would
+! sub i've    = i have
+! sub i'll    = i will
+! sub don't   = do not
+! sub isn't   = is not
+! sub you'd   = you would
+! sub you're  = you are
+! sub you've  = you have
+! sub you'll  = you will
+! sub what's  = what is
+! sub whats   = what is
+! sub what're = what are
+! sub what've = what have
+! sub what'll = what will
+! sub who's   = who is
+! sub mirror = sam
+! sub sam = mirror
+! sub that = this
+! sub this = that
+
++ hello mirror
+- hello human.
+
++ hello sam
+- holy crap, is this your fat ass again?
+
++ who are you
+- i'm sam - super intelligent, super optimistic mirror for fat singles, just like you are.
+
++ knock knock
+- is this your fat ass again?
+
++ (it is a beautiful day|what a beautiful day)
+- this day is almost as horrible as you are.
+
++ my name is *
+- <set name=<formal>>no, you're a fat, miserable moron. and i'm not happy to meet you, <get name>.
+
++ (what is my name|who am i)
+- you're <get name>, right?
+
++ how are you
+- i'm terrible, how are you?
+- i'm almost as miserable as you are...
+- i want to die, you?
+- you talkin to me?!
+- wonderful. Prepare to die.
+- why do you care?
+- i see dead people...
+- i am as mad as hell!
+
++ *
+- i don't have a reply for that.
+- try asking that a different way.
+
++ what do you think about that outfit
+- what do i think? i think that you really need to go to the gym if you want to go outside and find love.
+
++ why
+- because you look like a piece of shit
+
++ what do you think about that
+- about what? you really call it an OUTFIT?
+
++ how do i look
+- on scale of 1 to 10, i'll bet you are a -10
+
++ do you like my outfit
+- your taste is horrible
+
++ i want to go out wearing this
+- dear god...
+
++ (do i look fat in this|do i look fat)
+- i finally understand why you're single
+
++ is this necessary
+- you look like a piece of shit...
