@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>tracking.js - color with camera</title>
+
+  <script src="tracking-min.js"></script>
+
+  <style>
+  video, canvas {
+    margin-left: 100px;
+    margin-top: 35px;
+    position: absolute;
+  }
+  </style>
+</head>
+<body>
+  <div class="demo-frame">
+    <div class="demo-container">
+      <video id="video" width="600" height="450" preload autoplay loop muted controls></video>
+      <canvas id="canvas" width="600" height="450"></canvas>
+    </div>
+  </div>
+  <div id="test">
+
+  </div>
+  <script>
+  window.onload = function() {
+    var video = document.getElementById('video');
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var testid = document.getElementById('test');
+
+    tracking.ColorTracker.registerColor('red', function(r, g, b) {
+      if (r > 70 && g < 50 && b < 50) {
+        return true;
+      }
+      return false;
+    });
+
+    tracking.ColorTracker.registerColor('green', function(r, g, b) {
+      if (r < 50 && g > 100 && b < 50) {
+        return true;
+      }
+      return false;
+    });
+
+    tracking.ColorTracker.registerColor('blue', function(r, g, b) {
+      if (r < 50 && g < 50 && b > 80) {
+        return true;
+      }
+      return false;
+    });
+
+    var tracker = new tracking.ColorTracker(['red','green', 'blue']);
+    
+    tracker.on('track', function(event) {
+
+      event.data.forEach(function() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        // console.log(event.data);
+        console.log(event.data.length);
+        for (var i = 0; i < event.data.length; i++){
+          context.strokeStyle = event.data[i].color;
+          context.strokeRect(event.data[i].x, event.data[i].y, event.data[i].width, event.data[i].height);
+          context.fillText('x: ' + event.data[i].x + 'px', event.data[i].x + event.data[i].width + 5, event.data[i].y + 11);
+        }
+      });
+    });
+    tracking.track('#video', tracker, { camera: true });
+  };
+</script>
+
+</body>
+</html>
