@@ -1,75 +1,83 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>tracking.js - color with camera</title>
-
+  <meta charset="UTF-8">
+  <title>Tracking Color Blobs in Webcam Feed Using Tracking.js</title>
+  <link rel="stylesheet" href="styles.css">
   <script src="tracking-min.js"></script>
-
-  <style>
-  video, canvas {
-    margin-left: 100px;
-    margin-top: 35px;
-    position: absolute;
-  }
-  </style>
+  <script src="script.js"></script>
 </head>
+
 <body>
-  <div class="demo-frame">
-    <div class="demo-container">
-      <video id="video" width="600" height="450" preload autoplay loop muted controls></video>
-      <canvas id="canvas" width="600" height="450"></canvas>
+
+  <div class="display">
+    <video id="webcam" width="320" height="240" autoplay></video>
+    <canvas id="canvas" width="320" height="240"></canvas>
+  </div>
+<div id="pickedupcolor">
+Click on webcam frame to select color.
+</div>
+  <div class="ui">
+
+    <!-- <div class="controls"> -->
+
+    <!-- <p>Click on the webcam feed to pick a color, then adjust tolerance.</p> -->
+
+    <div>
+      <div id="color0" class="colorBlock"></div>
+
+      <label for="tolerance0">Tolerance:</label>
+      <input id="tolerance0" type="range" value="50" max="255" min="0" step="1">
+      <input type="number" id="number0red" name="name" required
+      size="5">
+      <input type="number" id="number0green" name="name" required
+      size="5">
+      <input type="number" id="number0blue" name="name" required
+      size="5">
+      <input type="submit" value="OK" onclick="submitColor(0)">
     </div>
-  </div>
-  <div id="test">
+
+    <!-- </div> -->
+
+
+
+    <div>
+      <div id="color1" class="colorBlock"></div>
+      <label for="tolerance1">Tolerance1:</label>
+      <input id="tolerance1" type="range" value="50" max="255" min="0" step="1">
+      <input type="number" id="number1red" name="name" required
+      size="5">
+      <input type="number" id="number1green" name="name" required
+      size="5">
+      <input type="number" id="number1blue" name="name" required
+      size="5">
+      <input type="submit" value="OK">
+    </div>
+
+    <!-- </div> -->
+
+
+
+    <div>
+      <div id="color2" class="colorBlock"></div>
+      <label for="tolerance2">Tolerance2:</label>
+      <input id="tolerance2" type="range" value="50" max="255" min="0" step="1">
+      <input type="number" id="number2red" name="name" required
+      size="5">
+      <input type="number" id="number2green" name="name" required
+      size="5">
+      <input type="number" id="number2blue" name="name" required
+      size="5">
+      <input type="submit" value="OK">
+    </div>
+
+    <!-- </div> -->
+
 
   </div>
-  <script>
-  window.onload = function() {
-    var video = document.getElementById('video');
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-    var testid = document.getElementById('test');
-
-    tracking.ColorTracker.registerColor('red', function(r, g, b) {
-      if (r > 70 && g < 50 && b < 50) {
-        return true;
-      }
-      return false;
-    });
-
-    tracking.ColorTracker.registerColor('green', function(r, g, b) {
-      if (r < 50 && g > 100 && b < 50) {
-        return true;
-      }
-      return false;
-    });
-
-    tracking.ColorTracker.registerColor('blue', function(r, g, b) {
-      if (r < 50 && g < 50 && b > 80) {
-        return true;
-      }
-      return false;
-    });
-
-    var tracker = new tracking.ColorTracker(['red','green', 'blue']);
-    
-    tracker.on('track', function(event) {
-
-      event.data.forEach(function() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        // console.log(event.data);
-        console.log(event.data.length);
-        for (var i = 0; i < event.data.length; i++){
-          context.strokeStyle = event.data[i].color;
-          context.strokeRect(event.data[i].x, event.data[i].y, event.data[i].width, event.data[i].height);
-          context.fillText('x: ' + event.data[i].x + 'px', event.data[i].x + event.data[i].width + 5, event.data[i].y + 11);
-        }
-      });
-    });
-    tracking.track('#video', tracker, { camera: true });
-  };
-</script>
 
 </body>
+
 </html>
