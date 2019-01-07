@@ -1,5 +1,5 @@
 // Wait for the page to be ready
-var colors =[{r: 134, g: 71, b: 93}, {r: 0, g: 255, b: 0}, {r: 0, g: 0, b: 255}];
+var colors =[{r: 255, g: 0, b: 0}, {r: 0, g: 255, b: 0}, {r: 0, g: 0, b: 255}];
 
 
 window.addEventListener("load", function(e) {
@@ -22,35 +22,35 @@ window.addEventListener("load", function(e) {
     document.getElementById("number"+i+"red").value = colors[i].r;
     document.getElementById("number"+i+"green").value = colors[i].g;
     document.getElementById("number"+i+"blue").value = colors[i].b;
-
   }
 
 
 
-  tracking.ColorTracker.registerColor('dynamic0', function(r, g, b) {
-    return getColorDistance(colors[0], {r: r, g: g, b: b}) < slider0.value
+  tracking.ColorTracker.registerColor('0', function(r, g, b) {
+    return getColorDistance(colors[0], {r: r, g: g, b: b}) < slider0.value;
   });
-  tracking.ColorTracker.registerColor('dynamic1', function(r, g, b) {
+  tracking.ColorTracker.registerColor('1', function(r, g, b) {
     return getColorDistance(colors[1], {r: r, g: g, b: b}) < slider1.value
   });
-  tracking.ColorTracker.registerColor('dynamic2', function(r, g, b) {
+  tracking.ColorTracker.registerColor('2', function(r, g, b) {
     return getColorDistance(colors[2], {r: r, g: g, b: b}) < slider2.value
   });
 
-  var tracker = new tracking.ColorTracker(["dynamic0","dynamic1","dynamic2"]);
+  var tracker = new tracking.ColorTracker(["0","1","2"]);
 
   // Add callback for the "track" event
   tracker.on('track', function(e) {
 
     context.clearRect(0, 0, canvas.width, canvas.height);
-
+// alert(e.data.length);
     if (e.data.length !== 0) {
 
       e.data.forEach(function(rect) {
-        // console.log(rect);
-        drawRect(rect, context, colors[0]);
-        drawRect(rect, context, colors[1]);
-        drawRect(rect, context, colors[2]);
+
+         console.log(colors[parseInt(rect.color)]);
+      drawRect(rect, context, colors[parseInt(rect.color)]);
+      //  drawRect(rect, context, colors[1]);
+      //  drawRect(rect, context, colors[2]);
       });
 
     }
@@ -58,7 +58,9 @@ window.addEventListener("load", function(e) {
   });
 
   // Start tracking
-  tracking.track(   webcam,tracker,
+  tracking.track(
+    webcam,
+    tracker,
     {
       camera: true,  mediaConstraints: {
         video: {
@@ -73,7 +75,6 @@ window.addEventListener("load", function(e) {
   webcam.addEventListener("click", function (e) {
     var c = getColorAt(webcam, e.offsetX, e.offsetY);
     clickedcolor.innerHTML = "R : " + c.r + " G : " + c.g + " B : " + c.b;
-
   });
 
   function getColorAt(webcam, x, y) {
@@ -88,6 +89,7 @@ window.addEventListener("load", function(e) {
     return {r: pixel[0], g: pixel[1], b: pixel[2]};
   }
 });
+
 function submitColor(index){
   colors[index]= {r: document.getElementById("number"+index+"red").value, g: document.getElementById("number"+index+"green").value, b: document.getElementById("number"+index+"blue").value};
   document.getElementById('color'+index).style.backgroundColor = "rgb("+colors[index].r+","+colors[index].g+","+colors[index].b+")";
@@ -104,7 +106,8 @@ function getColorDistance(target, actual) {
 }
 
 function drawRect(rect, context, kolor) {
-  context.strokeStyle = "rgb("+kolor.r+","+kolor.g+","+kolor.b+")";
+  // context.strokeStyle = "rgb("+ kolor.r + "," + kolor.g + "," + kolor.b ")" ;
+  context.strokeStyle = "rgb("+parseInt(kolor.r)+","+parseInt(kolor.g)+","+parseInt(kolor.b)+")" ;
   context.strokeWeight = "1 px";
   context.strokeRect(rect.x, rect.y, rect.width, rect.height);
 }
