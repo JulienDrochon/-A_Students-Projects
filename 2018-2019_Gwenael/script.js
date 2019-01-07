@@ -42,15 +42,13 @@ window.addEventListener("load", function(e) {
   tracker.on('track', function(e) {
 
     context.clearRect(0, 0, canvas.width, canvas.height);
-// alert(e.data.length);
+    // alert(e.data.length);
     if (e.data.length !== 0) {
 
       e.data.forEach(function(rect) {
 
-         console.log(colors[parseInt(rect.color)]);
-      drawRect(rect, context, colors[parseInt(rect.color)]);
-      //  drawRect(rect, context, colors[1]);
-      //  drawRect(rect, context, colors[2]);
+        // console.log(colors[parseInt(rect.color)]);
+        drawRect(rect, context, colors[parseInt(rect.color)]);
       });
 
     }
