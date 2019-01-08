@@ -4,7 +4,7 @@ var colors =[{r: 255, g: 0, b: 0}, {r: 0, g: 255, b: 0}, {r: 0, g: 0, b: 255}];
 
 window.addEventListener("load", function(e) {
 
-  console.log("Page loaded!");
+  // console.log("Page loaded!");
 
   // Grab reference to the tags we will be using
   var slider0 = document.getElementById("tolerance0");
@@ -47,8 +47,10 @@ window.addEventListener("load", function(e) {
 
       e.data.forEach(function(rect) {
 
-        // console.log(colors[parseInt(rect.color)]);
+        console.log(colors[parseInt(rect.color)]);
         drawRect(rect, context, colors[parseInt(rect.color)]);
+        //  drawRect(rect, context, colors[1]);
+        //  drawRect(rect, context, colors[2]);
       });
 
     }
@@ -91,8 +93,8 @@ window.addEventListener("load", function(e) {
 function submitColor(index){
   colors[index]= {r: document.getElementById("number"+index+"red").value, g: document.getElementById("number"+index+"green").value, b: document.getElementById("number"+index+"blue").value};
   document.getElementById('color'+index).style.backgroundColor = "rgb("+colors[index].r+","+colors[index].g+","+colors[index].b+")";
-  console.log(document.getElementById("number"+index+"red").value);
-  console.log(colors[index].r);
+  //  console.log(document.getElementById("number"+index+"red").value);
+  //  console.log(colors[index].r);
 }
 
 function getColorDistance(target, actual) {

@@ -1,0 +1,16 @@
+// Chatbot's brain
+// https://github.com/aichaos/aiden
+
+! version = 2.0
+
++ [*] bonjour [*]
+- 1
+
++ [*] porte [*]
+- 2
+
++ [*] fenêtre [*]
+- 3
+
++ [*] test [*]
+- 4

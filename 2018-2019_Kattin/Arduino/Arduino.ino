@@ -1,6 +1,4 @@
 // Télécharger la bibliothèque Servo
-// Télécharger la librarie CapacitiveSensor (Menu -> Sketch -> Include Library -> Manage Libraries)
-
 
 #include <Servo.h> // // importation de la bibliothèque Servo
 
