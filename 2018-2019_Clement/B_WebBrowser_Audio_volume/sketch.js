@@ -25,7 +25,7 @@ console.log(inputData)
 
 function serialEvent() {
  // read a byte from the serial port:
- var inByte = serial.read();
+ var inByte = serial.readLine();
  // store it in a global variable:
  inputData = inByte;
 }
