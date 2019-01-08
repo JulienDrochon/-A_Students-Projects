@@ -15,7 +15,8 @@ var inputData;
 
 function setup() {
   serial = new p5.SerialPort();    // make a new instance of the serialport library
-      serial.open(portName);
+      //serial.open(portName);
+      serial.on('data', serialEvent);
 }
 
 function draw() {
