@@ -6,7 +6,7 @@ var output;
 var myVoice;
 
 var serial;          // variable to hold an instance of the serialport library
-var portName = '/dev/cu.wchusbserialfd120'; // fill in your serial port name here
+var portName = '/dev/cu.usbmodemFD121'; // fill in your serial port name here
 var inData;                            // for incoming serial data
 var outByte = 0;                       // for outgoing data
 
@@ -21,8 +21,16 @@ function setup() {
   noCanvas();
   let bot = new RiveScript({utf8: true});
   // Load a list of files all at once
-  var files = ['brain.rive'];
-  bot.loadFile(files, botLoaded, errorLoading);
+  // var files = ['brain.rive'];
+  // bot.loadFile(files, botLoaded, errorLoading);
+  bot.loadFile("brain.rive", function() {
+    console.log("Brain loaded!");
+    bot.sortReplies();
+  }, function(err, filename, lineno) {
+    console.log("An error occurred!");
+  });
+
+  // bot.loadFile(files).then(botLoaded).catch(errorLoading)
   //---- Voice Speech ---//
   myVoice = new p5.Speech();
   console.log(myVoice.listVoices());
@@ -47,28 +55,35 @@ function setup() {
     console.log(speechRec);
     if (speechRec.resultValue) {
       said = speechRec.resultString;
-      var reply = bot.reply("local-user", said);
-      output = select('#bot');
-      output.html(reply);
+      //var reply = bot.reply("local-user", said);
 
-      if (reply == 1) {
-        myVoice.speak("la réponse est un");
-        outByte = 1;
-      }
-      else if (reply == 2) {
-        myVoice.speak("la réponse est deux");
-        outByte = 2;
-      }
-      else if (reply == 3) {
-        myVoice.speak("la réponse est trois");
-        outByte = 3;
-      }
-      else if (reply == 4) {
-        myVoice.speak("la réponse est quatre");
-        outByte = 4;
-      }
-      
-      serial.write(outByte); // send to Arduino
+      bot.reply("local-user", said).then(function(reply) {
+        //console.log("Bot>", reply);
+
+        output = select('#bot');
+        output.html(reply);
+
+        if (reply == 1) {
+          myVoice.speak("la réponse est un");
+          outByte = 1;
+        }
+        else if (reply == 2) {
+          myVoice.speak("la réponse est deux");
+          outByte = 2;
+        }
+        else if (reply == 3) {
+          myVoice.speak("la réponse est trois");
+          outByte = 3;
+        }
+        else if (reply == 4) {
+          myVoice.speak("la réponse est quatre");
+          outByte = 4;
+        }
+        console.log('send');
+        serial.write(outByte); // send to Arduino
+      });
+
+
     }
   }
   //---- end voice recognition
