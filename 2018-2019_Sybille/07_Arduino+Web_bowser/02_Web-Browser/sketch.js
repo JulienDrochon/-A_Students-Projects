@@ -3,6 +3,37 @@
 // avec javascript
 // jquery documentation : https://api.jquery.com/category/css/
 // blastjs documentation : http://velocityjs.org/blast/
+// on utilise p5js + p5js serial port + p5serial control pour faire communiquer
+// arduino et navigateur web
+
+let serialPort;
+let portName = 'dev/cu.usbmodem***'; // variable pour identifier le port série de la carte arduino
+let dataFromArduino; // variable pour les données arrivant d'arduino
+
+function setup(){ // function setup pour p5js
+
+  serialPort = new p5.SerialPort();    // nouvelle instance du port serie
+  serialPort.list();
+  serialPort.on('data', ArduinoEvent);  // callback quand de nouvelles données arrivent d'arduino, la function ArduinoEvent() s'execute
+  serialPort.open(portName);           // ouvrir le port serie
+}
+
+function ArduinoEvent() {
+  dataFromArduino = Number(serialPort.readLine()); // on lit les données arrivant d'arduino et on attribue la valeur à la variable dataFromArduino
+  //on transforme la plage de valeur de dataFromArduino
+  let transformeValeur = map(dataFromArduino, 0, 1000, -10, 20);
+  //pour qu'elle corresponde à celle de la transformation du texte
+  if(dataFromArduino >0){
+    $('#paragrapheTexteMots:not(".mot1class"):not(".mot2class")').each(function(i) {
+      $(this).css({
+        'letter-spacing': transformeValeur+"px", // interlettrage
+        'font-size': parseInt(transformeValeur)+"px", // corps de caractere
+        'line-height': parseInt(transformeValeur)+"px", // interlignage
+
+      })
+    });
+  }
+}
 
 // je détermine mes variables (des mots) que je souhaite identifier
 let mot1 = {"drôles": true};
@@ -67,27 +98,19 @@ $('#paragrapheTexteMotsChoisis .mot2class').each(function(i) {
   })
 });
 
-// avec jquery ($)
-// pour tous les mots n'ayant ni la class 'mot1class' ou 'mot2class'…
-$('#paragrapheTexteMots:not(".mot1class"):not(".mot2class")').each(function(i) {
-  $(this).css({
-    color: 'rgba(66, 244, 182, 1)', // couleur verte, opaque
-    'letter-spacing' : '-10px', // changer interlettrage
-    'font-size' : '40px', // changer corps caractère
-    'line-height' : '3px' // changer interlignage
-  })
-});
 
 // pour tous les mots ayant la class 'mot1class'…
 $('#paragrapheTexteMots .mot1class').each(function(i) {
   $(this).css({ // j'attribue les propriétés css :
-  color: 'rgba(0,0, 0, 0)' // couleur transparente
+  color: 'rgba(0,0, 0, 0)', // couleur transparente
+  'letter-spacing' : '0px'
 })
 });
 
 // pour tous les mots ayant la class 'mot2class'…
 $('#paragrapheTexteMots .mot2class').each(function(i) {
   $(this).css({
-    color: 'rgba(0, 0, 0, 0)' // couleur transparente
+    color: 'rgba(0, 0, 0, 0)', // couleur transparente
+    'letter-spacing' : '0px'
   })
 });
