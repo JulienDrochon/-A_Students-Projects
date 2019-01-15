@@ -71,7 +71,7 @@ $('#paragrapheTexteMotsChoisis .mot2class').each(function(i) {
 // pour tous les mots n'ayant ni la class 'mot1class' ou 'mot2class'…
 $('#paragrapheTexteMots:not(".mot1class"):not(".mot2class")').each(function(i) {
   $(this).css({
-    color: 'rgba(66, 244, 182, 1)', // couleur verte, quasi transparente
+    color: 'rgba(66, 244, 182, 1)', // couleur verte, opaque
     'letter-spacing' : '-10px', // changer interlettrage
     'font-size' : '40px', // changer corps caractère
     'line-height' : '3px' // changer interlignage

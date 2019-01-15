@@ -39,14 +39,14 @@ $('#paragrapheTexte:not(".mot1class"):not(".mot2class")').each(function(i) {
 // pour tous les mots ayant la class 'mot1class'…
 $('#paragrapheTexte .mot1class').each(function(i) {
   $(this).css({ // j'attribue les propriétés css :
- color: 'rgba(252, 0, 54, 1)', // couleur rouge
+ color: 'rgba(252, 0, 54, 1)', // couleur rouge, opaque
  'letter-spacing': '3px' // changer interlettrage
 })
 });
 // pour tous les mots ayant la class 'mot2class'…
 $('#paragrapheTexte .mot2class').each(function(i) {
   $(this).css({
-   color: 'rgba(78, 66, 244, 1)',
+   color: 'rgba(78, 66, 244, 1)',  // couleur bleu opaque
    'letter-spacing': '3px' // changer interlettrage
   })
 });

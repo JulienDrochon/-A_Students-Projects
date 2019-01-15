@@ -84,6 +84,7 @@ $('#paragrapheTexteMots .mot1class').each(function(i) {
   color: 'rgba(0,0, 0, 0)' // couleur transparente
 })
 });
+
 // pour tous les mots ayant la class 'mot2class'…
 $('#paragrapheTexteMots .mot2class').each(function(i) {
   $(this).css({
