@@ -7,21 +7,20 @@
 // arduino et navigateur web
 
 let serialPort;
-let portName = 'dev/cu.usbmodem***'; // variable pour identifier le port série de la carte arduino
 let dataFromArduino; // variable pour les données arrivant d'arduino
 
 function setup(){ // function setup pour p5js
 
   serialPort = new p5.SerialPort();    // nouvelle instance du port serie
-  serialPort.list();
+
   serialPort.on('data', ArduinoEvent);  // callback quand de nouvelles données arrivent d'arduino, la function ArduinoEvent() s'execute
-  serialPort.open(portName);           // ouvrir le port serie
+
 }
 
 function ArduinoEvent() {
   dataFromArduino = Number(serialPort.readLine()); // on lit les données arrivant d'arduino et on attribue la valeur à la variable dataFromArduino
   //on transforme la plage de valeur de dataFromArduino
-  let transformeValeur = map(dataFromArduino, 5, 20, -10, 20);
+  let transformeValeur = map(dataFromArduino, 5, 15, -10, 20);
   //pour qu'elle corresponde à celle de la transformation du texte
   if(dataFromArduino >0){
     $('#paragrapheTexteMots:not(".mot1class"):not(".mot2class")').each(function(i) {
