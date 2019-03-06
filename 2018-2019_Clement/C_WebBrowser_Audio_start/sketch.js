@@ -47,6 +47,7 @@ function aftersound2(){
 
 function aftersound3(){
   console.log("fin son 3");
+  soundFile04.play();
 }
 
 function aftersound4(){
