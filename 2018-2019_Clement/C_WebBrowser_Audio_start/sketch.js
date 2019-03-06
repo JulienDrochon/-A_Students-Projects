@@ -16,6 +16,7 @@ function setup() {
   soundFile01.onended(aftersound1);
   soundFile02.onended(aftersound2);
   soundFile03.onended(aftersound3);
+  soundFile04.onended(aftersound4);
 }
 
 function serialEvent() {
@@ -46,4 +47,8 @@ function aftersound2(){
 
 function aftersound3(){
   console.log("fin son 3");
+}
+
+function aftersound4(){
+  console.log("fin son 4");
 }
