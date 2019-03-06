@@ -10,7 +10,7 @@ function preload() {
 
 function setup() {
   serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodemFA131");
+  // serial.open("/dev/cu.usbmodemFA131");
   serial.on('data', serialEvent);
 
   soundFile01.onended(aftersound1);
