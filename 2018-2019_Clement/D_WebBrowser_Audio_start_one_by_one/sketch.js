@@ -49,19 +49,16 @@ function serialEvent() {
 
 function aftersound1(){
   console.log("fin son 1");
-
   i++;
 }
 
 function aftersound2(){
   console.log("fin son 2");
-
   i++;
 }
 
 function aftersound3(){
   console.log("fin son 3");
-
   i++;
 }
 

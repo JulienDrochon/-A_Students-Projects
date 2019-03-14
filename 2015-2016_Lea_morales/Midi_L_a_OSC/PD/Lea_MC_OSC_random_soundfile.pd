@@ -1,0 +1,94 @@
+#N canvas 205 0 1234 723 10;
+#X declare -lib mrpeach;
+#X obj 917 183 loadbang;
+#X obj 917 207 delay 100;
+#X obj 920 233 + 1;
+#X msg 919 259 \; pd dsp 1;
+#X obj 732 760 dac~ 1;
+#X obj 765 630 readsf~ 1;
+#X obj 822 662 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 938 392 random 6;
+#X obj 942 419 sel 0 1 2 3 4 5;
+#X msg 619 487 open m01.wav \, 1;
+#X msg 720 486 open m02.wav \, 1;
+#X msg 816 487 open m03.wav \, 1;
+#X msg 917 487 open m04.wav \, 1;
+#X msg 1018 486 open m05.wav \, 1;
+#X msg 1114 487 open m06.wav \, 1;
+#X obj 795 388 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 835 386 5 0 0 0 - - -;
+#X obj 75 266 unpackOSC;
+#X obj 177 181 unpack 0 0 0 0;
+#X floatatom 177 212 3 0 0 0 - - -;
+#X floatatom 208 212 3 0 0 0 - - -;
+#X floatatom 240 212 3 0 0 0 - - -;
+#X floatatom 272 212 3 0 0 0 - - -;
+#X obj 87 424 print blibli_dit;
+#X obj 211 424 print les_autres_messages;
+#X obj 86 304 print unpacked;
+#X text 207 137 <-- L'argument '3011' correspond au 'port' sur lequel
+le udpsend se branchera;
+#X text 307 211 <-- la connexion se fait depuis l'ordinateur ayant
+cette adresse IP;
+#X obj 31 72 import mrpeach;
+#X text 143 70 <-- la déclaration de la bibliothèque;
+#X text 238 352 <-- [routeOSC] permet de sélectionner les messages
+envoyés selon le sélecteur. l'argument 'blibli' peut être changé mais
+doit correspondre à l'argument employé par [udpsend];
+#X obj 75 490 select 2 3 4;
+#X obj 75 517 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 102 517 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 129 517 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 156 517 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 186 488 <-- il s'agit ensuite de filtrer les messages avec
+[select] pour agir sur le reste de notre patche.;
+#X obj 181 252 127;
+#X obj 275 251 1;
+#X obj 75 141 udpreceive 8000;
+#X obj 75 354 routeOSC /fromPRocessing;
+#X connect 0 0 1 0;
+#X connect 0 0 37 0;
+#X connect 0 0 38 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 5 0 4 0;
+#X connect 5 1 6 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 8 1 10 0;
+#X connect 8 2 11 0;
+#X connect 8 3 12 0;
+#X connect 8 4 13 0;
+#X connect 8 5 14 0;
+#X connect 9 0 5 0;
+#X connect 10 0 5 0;
+#X connect 11 0 5 0;
+#X connect 12 0 5 0;
+#X connect 13 0 5 0;
+#X connect 14 0 5 0;
+#X connect 15 0 7 0;
+#X connect 16 0 15 0;
+#X connect 17 0 25 0;
+#X connect 17 0 40 0;
+#X connect 17 0 15 0;
+#X connect 18 0 19 0;
+#X connect 18 1 20 0;
+#X connect 18 2 21 0;
+#X connect 18 3 22 0;
+#X connect 31 0 32 0;
+#X connect 31 1 33 0;
+#X connect 31 2 34 0;
+#X connect 31 3 35 0;
+#X connect 37 0 19 0;
+#X connect 38 0 22 0;
+#X connect 39 0 17 0;
+#X connect 39 1 18 0;
+#X connect 40 0 23 0;
+#X connect 40 0 31 0;
+#X connect 40 1 24 0;
