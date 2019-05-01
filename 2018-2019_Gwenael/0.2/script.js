@@ -1,3 +1,6 @@
+
+
+
 // 3 couleurs par défaut au démarrage, avant qu'on les change
 var colors =[{r: 255, g: 0, b: 0}, {r: 0, g: 255, b: 0}, {r: 0, g: 0, b: 255}];
 // color 0 : red
@@ -200,4 +203,40 @@ function pairwise(list) {
   rest  = list.slice(1),
   pairs = rest.map(function (x) { return [first, x]; });
   return pairs.concat(pairwise(rest));
+}
+
+//fonction pour générer phrase
+function sentenceGenerator(){
+  //reminder :
+  // 0 = "Le Pays"
+  // 1 = "Pays"
+  // 2 = "leaderPays"
+  // 3 = "adjectifPays"
+  // 4 = "objet symbolique du Pays"
+  // 5 = "organisation symbolique du Pays"
+  // 6 = "Le (endroit symbolique du pays)"
+  // 7 = " in ( pays )"
+  // 8 = " from ( pays )"
+  // 9 : " of the ( president du pays )"
+
+  phrasetype =[
+    "Attentat "+pays1[6]+"."+" Le terroriste présumé est "+pays2[3]+". "+pays2[5]+" serait impliqué.",
+    "Frappes aériennes "+pays1[6]+": "+pays2[0]+" contrattaque.",
+    "Le sommet "+pays1[1]+"-"+pays2[1]+" aura-t-il lieu?",
+    "Attaque chimique "+ pays1[4] + " " + pays2[6] + ". L'ONU condamne "+ pays1[2] + ".",
+    "Les services secrets "+ pays1[3] + " suspectés de l'assassinat d'un scientifique "+ pays2[3] + ".",
+    pays1[2] + " dénonce la légalisation du cannabice " + pays2[7],
+    pays1[1]+"-"+pays2[1]+": une longue histoire de préjugés et de domination.",
+    "Ingérence présumée " + pays1[8] + " dans l'élection " + pays2[9],
+    "Entre les services secrets " + pays1[3] + " et " + pays2[3] + ", la guerre froide est de retour.",
+    "Deux ex-espions " + pays1[3] + " suspectés d'avoir travaillé pour " + pays2[0] + ".",
+    "Empoisonnements suspects " + pays1[6] + ". " + pays1[5] + " accuse " + pays2[0] + ".",
+    Math.floor(Math.random()*38) + " morts dans une attaque au sarin " + pays1[7] + ". " + pays2[2] + " revendique l'attaque."
+  ];
+
+  geopolitik = Math.floor(Math.random()*Math.floor(phrasetype.length));
+  textoutput = (phrasetype[geopolitik]);
+  // console.log("situation type: "+geopolitik);
+  console.log(textoutput);
+  lastgeopolitik = geopolitik;
 }

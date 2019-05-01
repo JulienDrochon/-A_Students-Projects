@@ -57,29 +57,47 @@ window.addEventListener("load", function(e) {
         drawRect(rect, context, colors[parseInt(rect.color)], parseInt(rect.color));
 
 
-          // détermination des differentes paires de couleurs
-          var pairs = pairwise(trackedAreas.data);
-          // si il y a des paires de couleurs détectées…
-          if(pairs.length !== 0){
-            // pour chacune des paires détectées…
-            pairs.forEach( function(rectPair) {
-              // detection collision
-              if( distance(rectPair[0], rectPair[1]) < rectPair[0].width/2 + rectPair[1].width/2 ) {
-                // detection collision rouge / vert
-                if(rectPair[0].color == "0" && rectPair[1].color == "1") {
-                  alert ("collision rouge / vert");
-                }
-                // detection collision rouge / bleu
-                if(rectPair[0].color == "0" && rectPair[1].color == "2") {
-                  alert ("collision rouge / bleu");
-                }
-                // detection collision vert / bleu
-                if(rectPair[0].color == "1" && rectPair[1].color == "2") {
-                  alert ("collision vert / bleu");
+        // détermination des differentes paires de couleurs
+        var pairs = pairwise(trackedAreas.data);
+        // si il y a des paires de couleurs détectées…
+        if(pairs.length !== 0){
+          // pour chacune des paires détectées…
+          pairs.forEach( function(rectPair) {
+            // detection collision
+            if( distance(rectPair[0], rectPair[1]) < rectPair[0].width/2 + rectPair[1].width/2 ) {
+              // detection collision rouge / vert
+              if(rectPair[0].color == "0" && rectPair[1].color == "1") {
+              //  alert ("collision rouge / vert");
+                if(isSpeaking==false){
+                  sentenceGenerator(0, 1);
+                  myVoice.speak(textoutput);
+                  isSpeaking = true;
+                  myVoice.onEnd = function(){isSpeaking = false;};
                 }
               }
-            }); //  fin de pairs.forEach( function(rectPair)
-          }
+              // detection collision rouge / bleu
+              if(rectPair[0].color == "0" && rectPair[1].color == "2") {
+              //  alert ("collision rouge / bleu");
+                if(isSpeaking==false){
+                  sentenceGenerator(0, 2);
+                  myVoice.speak(textoutput);
+                  isSpeaking = true;
+                  myVoice.onEnd = function(){isSpeaking = false;};
+                }
+              }
+              // detection collision vert / bleu
+              if(rectPair[0].color == "1" && rectPair[1].color == "2") {
+              //  alert ("collision vert / bleu");
+                if(isSpeaking==false){
+                  sentenceGenerator(1, 2);
+                  myVoice.speak(textoutput);
+                  isSpeaking = true;
+                  myVoice.onEnd = function(){isSpeaking = false;};
+                }
+              }
+            }
+          }); //  fin de pairs.forEach( function(rectPair)
+        }
 
       }); // fin de   trackedAreas.data.forEach
     }
@@ -100,9 +118,9 @@ window.addEventListener("load", function(e) {
 
 
 
-// ----------------------------------------------------------------- //
-// Fonctions custom
-// ----------------------------------------------------------------- //
+  // ----------------------------------------------------------------- //
+  // Fonctions custom
+  // ----------------------------------------------------------------- //
 
   // fonction pour obtenir les valeurs R, G, B quand on clique sur l'image de la webcam
   webcam.addEventListener("click", function (e) {
@@ -139,7 +157,7 @@ function getColorDistance(target, actual) {
   );
 }
 
-// Deesin des rectangles autour de la forme colorée
+// Dessin des rectangles autour de la forme colorée
 function drawRect(rect, context, kolor) {
   context.strokeStyle = "rgb("+parseInt(kolor.r)+","+parseInt(kolor.g)+","+parseInt(kolor.b)+")" ; // couleur du contour
   context.strokeWeight = "1 px"; //épaisseur du contour
@@ -171,4 +189,95 @@ function pairwise(list) {
   rest  = list.slice(1),
   pairs = rest.map(function (x) { return [first, x]; });
   return pairs.concat(pairwise(rest));
+}
+
+// ------ Speak !
+//fonction pour générer phrase
+var paysA = ["Le Royaume-Uni",
+"Royaume-Uni",
+"Thérésa May",
+"anglais",
+"avec un bol de porridge",
+"Kète Middeultone",
+"dans le métro londonien",
+"en Angleterre",
+"du Royaume-Uni",
+"de Theresa May"];
+
+var paysB = ["La Turquie",
+"Turquie",
+"Erdogan",
+"turc",
+"au kebab",
+"Teurkiche Airlines",
+"à Istanbul",
+"en Turquie",
+"de la Turquie",
+"d'Erdogan"];
+
+var paysC = ["Le Vatican",
+"Vatican",
+"Le pape François",
+"catholique",
+"à l'eau bénite",
+"Le cardinal Sodano",
+"dans la Basilique Saint-Pierre",
+"au Vatican",
+"du Vatican",
+"du pape François",
+];
+
+ var paysloto = [ paysA, paysB, paysC ];
+
+
+
+var textoutput;
+
+function sentenceGenerator(country01, country02){
+  //reminder :
+  // 0 = "Le Pays"
+  // 1 = "Pays"
+  // 2 = "leaderPays"
+  // 3 = "adjectifPays"
+  // 4 = "objet symbolique du Pays"
+  // 5 = "organisation symbolique du Pays"
+  // 6 = "Le (endroit symbolique du pays)"
+  // 7 = " in ( pays )"
+  // 8 = " from ( pays )"
+  // 9 : " of the ( president du pays )"
+
+var phrasetype =[
+  "Attentat "+paysloto[country01][6]+"."+" Le terroriste présumé est "+paysloto[country02][3]+". "+paysloto[country02][5]+" serait impliqué.",
+  "Frappes aériennes "+paysloto[country01][6]+": "+paysloto[country02][0]+" contrattaque.",
+  "Le sommet "+paysloto[country01][1]+"-"+paysloto[country02][1]+" aura-t-il lieu?",
+  "Attaque chimique "+ paysloto[country01][4] + " " + paysloto[country02][6] + ". L'ONU condamne "+ paysloto[country01][2] + ".",
+  "Les services secrets "+ paysloto[country01][3] + " suspectés de l'assassinat d'un scientifique "+ paysloto[country02][3] + ".",
+  paysloto[country01][2] + " dénonce la légalisation du cannabice " + paysloto[country02][7],
+  paysloto[country01][1]+"-"+paysloto[country02][1]+": une longue histoire de préjugés et de domination.",
+  "Ingérence présumée " + paysloto[country01][8] + " dans l'élection " + paysloto[country02][9],
+  "Entre les services secrets " + paysloto[country01][3] + " et " + paysloto[country02][3] + ", la guerre froide est de retour.",
+  "Deux ex-espions " + paysloto[country01][3] + " suspectés d'avoir travaillé pour " + paysloto[country02][0] + ".",
+  "Empoisonnements suspects " + paysloto[country01][6] + ". " + paysloto[country01][5] + " accuse " + paysloto[country02][0] + ".",
+  Math.floor(Math.random()*38) + " morts dans une attaque au sarin " + paysloto[country01][7] + ". " + paysloto[country02][2] + " revendique l'attaque."
+];
+
+  var geopolitik = Math.floor(Math.random()*Math.floor(phrasetype.length));
+  textoutput = (phrasetype[geopolitik]);
+  // console.log("situation type: "+geopolitik);
+  console.log(textoutput);
+  lastgeopolitik = geopolitik;
+}
+
+var myVoice; // new P5.Speech object
+var isSpeaking = false;
+
+function setup()
+{
+  console.log(paysloto[0][0]);
+  myVoice = new p5.Speech();
+  myVoice.setLang('fr_FR');
+}
+
+function EndSpeech() {
+
 }
