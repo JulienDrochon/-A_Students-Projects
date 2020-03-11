@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  </head>
+  <body>
+    <audio id="monFichierAudio" controls>
+      <source
+        src="soundfile/la-grand-mere-de-vala-animation.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <script>
+      var variableSon = document.querySelector("#monFichierAudio");
+
+      var socket = io("/PhoneToServer");
+      socket.on("dataFromPhone", playSound);
+
+      function playSound(data) {
+        console.log("regie" + data);
+        if (variableSon.paused) {
+          variableSon.play();
+        } else {
+          variableSon.pause();
+        }
+      }
+    </script>
+  </body>
+</html>
