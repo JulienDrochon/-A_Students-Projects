@@ -3,6 +3,7 @@ const app = express();
 
 app.use(express.static(__dirname + "/public"));
 
+// ---- Alwaysdata réglages server
 const server = app.listen(
   process.env.ALWAYSDATA_HTTPD_PORT,
   "127.3.27.115",
@@ -11,6 +12,7 @@ const server = app.listen(
   }
 );
 
+// ---- Test serveur local : réglages server
 // const server = app.listen(3000, () => {
 //   console.log(`Express running → PORT ${server.address().port}`);
 // });
