@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Step sequencer</title>
+    <link rel="stylesheet" href="/assets/css/reset.css" />
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/dialogs.css" />
+  </head>
+
+  <body>
+    <header></header>
+
+    <section id="sequencer">
+      <noscript
+        >This step sequencer toy runs on JavaScript, so please turn it on if you
+        wish to play with it.</noscript
+      >
+
+      <div id="transport"></div>
+
+      <div id="trackmanager"></div>
+
+      <div id="sequence"><!-- Where the magic happens --></div>
+    </section>
+
+    <footer>
+      <input id="input" type="file" />
+
+      <div id="save"><button>Save</button></div>
+
+      <a download="save.json" id="downloadFile" style="display: none"
+        >Download</a
+      >
+    </footer>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="/assets/js/vendor/jquery-1.9.0.min.js"><\/script>'
+        );
+      var addStep = false;
+    </script>
+    <script src="/assets/js/vendor/jquery.kontrol.min.js"></script>
+    <script src="/assets/js/vendor/jquery.selectbox.min.js"></script>
+    <script src="/assets/js/namespace.js"></script>
+    <script src="/assets/js/eventdispatcher.js"></script>
+    <script src="/assets/js/samplelibrary.js"></script>
+    <script src="/assets/js/channel.js"></script>
+    <script src="/assets/js/channelmanager.js"></script>
+    <script src="/assets/js/tempo.js"></script>
+    <script src="/assets/js/pattern.js"></script>
+    <script src="/assets/js/ui/dialogs.js"></script>
+    <script src="/assets/js/ui/samplepicker.js"></script>
+    <script src="/assets/js/ui/track.js"></script>
+    <script src="/assets/js/ui/trackmanager.js"></script>
+    <script src="/assets/js/ui/transport.js"></script>
+    <script src="/assets/js/bootstrap.js"></script>
+    <script src="/assets/js/custom.js"></script>
+  </body>
+</html>

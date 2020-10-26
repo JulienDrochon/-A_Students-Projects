@@ -20,7 +20,7 @@
   </style>
   <body>
     <div id="keyPressed">
-      <span style="font-size: 12px;">Presser la touche 'a'</span>
+      <span style="font-size: 12px;">Presser la touche 'v'</span>
     </div>
     <script>
       var socket = io.connect("/PhoneToServer");
@@ -34,7 +34,7 @@
           }
         }, 20);
         div.innerHTML = touche;
-        if (touche === "a") {
+        if (touche === "v") {
           div.style.opacity = 1;
           socket.emit("clavierPhone", "1");
         }
