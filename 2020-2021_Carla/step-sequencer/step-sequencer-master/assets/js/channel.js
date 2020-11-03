@@ -157,6 +157,9 @@
       // Trigger play on the instance
       audioInstance.play();
 
+      document.addEventListener("keydown", function () {
+        console.log(audioInstance);
+      });
       // Reorder array of audio instances so this is the top in the array
       setMostRecentAudioInstance(audioInstance);
     }

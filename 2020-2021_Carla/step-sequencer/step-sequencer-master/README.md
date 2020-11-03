@@ -1,17 +1,38 @@
+&rarr; <a href ="https://minhaskamal.github.io/DownGit/#/home?url=https:%2F%2Fgithub.com%2FJulienDrochon%2F-A_Students-Projects%2Ftree%2Fmaster%2F2020-2021_Carla%2Fstep-sequencer%2Fstep-sequencer-master">Télécharger le code</a>
+
+## Personnalisation du code original
+
 Changer le tempo initial au chargement :
+
 fichier transport.js : ligne 40
+
 Changer la lecture automatique
+
 fichier tempo.js : ligne 353
+
 Changer la signature temps :
+
 fichier transport.js : ligne 50 + 60
+
 Changer les pistes au chargement :
+
 fichier bootstrap.js : à partir de la ligne 24
+
 Ajouter des fichers sons :
+
 dans le dossier content/audio/2002DANC + samplelibrary.js
+
 Pour Relier les données de l'arduino
+
 track.js : ligne 266
+
 Volume
+
 track.js : ligne 214
+
+Url du sample quand on active le step
+
+channel.js : ligne xx
 
 # Step sequencer
 
