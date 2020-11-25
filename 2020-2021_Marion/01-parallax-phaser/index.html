@@ -1,0 +1,179 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <script src="/lib/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    let config = {
+        type: Phaser.AUTO,
+        width: 1020,
+        height: 600,
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        },
+        pixelArt: false,
+        physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        },
+    },
+
+    };
+
+    const game = new Phaser.Game(config);
+
+    function preload ()
+    {
+      this.load.image('sky', './assets/environment/sky-00.png');
+      this.load.image('farMountain', './assets/environment/planets-00.png');
+      this.load.image('mountain', './assets/environment/montains-far-00.png');
+      this.load.image('farTrees', './assets/environment/montains-near-00.png');
+      this.load.image('trees', './assets/environment/ground-00.png');
+      this.load.spritesheet('womanIdle', './assets/woman-idle.png', { frameWidth: 37, frameHeight: 46 });
+
+      this.load.spritesheet('womanWalk', './assets/woman-walk.png', { frameWidth: 37, frameHeight: 46 });
+      }
+
+    function create ()
+    {
+
+      this.farMountainDelta = 0.6;
+      this.mountainDelta = 1.30;
+      this.farTreesDelta = 1.9;
+      this.treesDelta = 2.9;
+
+      sky = this.add.image(510, 300, 'sky');
+      sky.displayWidth = 1050;
+      sky.scaleY = sky.scaleX;
+
+      this.farMountain = this.add.tileSprite(
+      510,
+     250,
+      1020,
+      600,
+      'farMountain'
+      )
+      // mySprite.scale.setTo(0.5, 0.5);
+
+      this.farMountain.tileScaleX = 0.3;
+      this.farMountain.tileScaleY = 0.3;
+
+      this.mountain = this.add.tileSprite(
+      510,
+      230,
+      1020,
+      600,
+      'mountain'
+      )
+
+      this.mountain.tileScaleX = 0.5;
+      this.mountain.tileScaleY = 0.5;
+
+      this.farTrees = this.add.tileSprite(
+      510,
+      230,
+      1020,
+      600,
+      'farTrees'
+      )
+
+      this.farTrees.tileScaleX = 0.5;
+      this.farTrees.tileScaleY = 0.5;
+
+      this.trees = this.add.tileSprite(
+      510,
+      565,
+      1020,
+      600,
+      'trees'
+      )
+
+      this.trees.tileScaleX = 0.5;
+      this.trees.tileScaleY = 0.5;
+
+      this.player = this.physics.add.sprite(50, 520, 'womanIdle');
+      this.player.displayWidth = 125;
+      this.player.scaleY = this.player.scaleX;
+      this.player.setCollideWorldBounds(true);
+
+      // this.cameras.main.startFollow(this.player);
+      this.cursors = this.input.keyboard.createCursorKeys();
+
+      this.anims.create({
+        key: 'left',
+        frames: this.anims.generateFrameNumbers('womanWalk', { start: 0, end: 5 }),
+        frameRate: 10,
+        repeat: -1
+      });
+
+      this.anims.create({
+        key: 'turn',
+        frames: this.anims.generateFrameNumbers('womanIdle', { start: 0, end: 6 }), 
+        frameRate: 5,
+        repeat: -1
+      });
+
+      this.anims.create({
+        key: 'right',
+        frames: this.anims.generateFrameNumbers('womanWalk', { start: 0, end: 5 }),
+        frameRate: 7,
+        repeat: -1
+      });
+
+    }
+
+    function update ()
+    {
+
+      if (this.cursors.left.isDown)
+      {
+        this.player.setVelocityX(-160);
+
+        this.player.anims.play('left', true);
+        this.player.flipX = true;
+
+        this.farMountain.tilePositionX -= this.farMountainDelta;
+        this.mountain.tilePositionX -= this.mountainDelta;
+        this.farTrees.tilePositionX -= this.farTreesDelta;
+        this.trees.tilePositionX -= this.treesDelta;
+
+      }
+      else if (this.cursors.right.isDown)
+      {
+        this.player.setVelocityX(160);
+
+        this.player.anims.play('right', true);
+        this.player.flipX = false;
+
+        this.farMountain.tilePositionX += this.farMountainDelta;
+        this.mountain.tilePositionX += this.mountainDelta;
+        this.farTrees.tilePositionX += this.farTreesDelta;
+        this.trees.tilePositionX += this.treesDelta;
+      }
+      else
+      {
+        this.player.setVelocityX(0);
+
+        this.player.anims.play('turn', true);
+      }
+
+    }
+
+</script>
+
+</body>
+</html>
